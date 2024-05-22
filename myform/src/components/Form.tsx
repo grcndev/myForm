@@ -11,22 +11,27 @@ import SideComponent from './SideComponent'
 import Summary from './layout/Summary'
 import Feedback from './Feedback'
 
+
+
+
 type Inputs = z.infer<typeof FormDataSchema>
 
 type FieldName = keyof Inputs
 
 const steps = [
     { id: 'Step 1', name: 'Personal Information', fields: ['name', 'email', 'phoneNumber'] },
-    { id: 'Step 2', name: 'Select Plan', fields: ['arcade', 'advanced', 'pro'] },
+    { id: 'Step 2', name: 'Select Plan', fields: ['selectedPlan'] },
     { id: 'Step 3', name: 'Pick Add-Ons', fields: ['add_ons'] },
     { id: 'Step 4', name: 'Summary' },
-    { id: 'Step 5', name: 'Complete'},
+    { id: 'Step 5', name: 'Complete' },
 ]
 
 const Form = () => {
 
     const [currentStep, setCurrentStep] = useState(0)
-    const { register, handleSubmit, watch, reset, trigger, formState: { errors }} = useForm<Inputs>({ resolver: zodResolver(FormDataSchema)})
+
+    const { getValues, setValue ,register, handleSubmit, watch, reset, trigger, formState: { errors } } = useForm<Inputs>({ resolver: zodResolver(FormDataSchema) })
+
 
     const processForm: SubmitHandler<Inputs> = data => {
         console.log('foi!', data)
@@ -54,23 +59,23 @@ const Form = () => {
 
     return (
         <section className='flex items-center justify-between m-48 p-6 rounded-xl bg-white'>
-            <SideComponent />
+            <SideComponent currentStep={currentStep}/>
             <div className='flex flex-col'>
                 <form className='mx-20 mt-8' onSubmit={handleSubmit(processForm)}>
                     {currentStep === 0 && (
                         <PersonalInfo register={register} errors={errors} />
                     )}
                     {currentStep === 1 && (
-                        <SelectPlan register={register} errors={errors} />
+                        <SelectPlan  errors={errors} setValue={setValue}/>
                     )}
                     {currentStep === 2 && (
-                        <AddOns register={register} errors={errors} />
+                        <AddOns errors={errors} setValue={setValue}/>
                     )}
                     {currentStep === 3 && (
-                       <Summary register={register}/>
+                        <Summary watch={SelectPlan} />
                     )}
                     {currentStep === 4 && (
-                        <Feedback/>
+                        <Feedback />
                     )}
                 </form>
 
@@ -78,17 +83,17 @@ const Form = () => {
                     <div className='flex justify-between'>
                         {currentStep === 0 ? (
                             <button>
-                        </button>
+                            </button>
                         ) : (
-                        <button
-                            type='button'
-                            onClick={prev}
-                            disabled={currentStep === 0}
-                            className=' bg-white px-2 py-1 text-sm font-semibold text-marine_bleu cursor-pointer disabled:cursor-not-allowed disabled:opacity-50'
-                        >
-                            Go Back
-                        </button>
-)}
+                            <button
+                                type='button'
+                                onClick={prev}
+                                disabled={currentStep === 0}
+                                className=' bg-white px-2 py-1 text-sm font-semibold text-marine_bleu cursor-pointer disabled:cursor-not-allowed disabled:opacity-50'
+                            >
+                                Go Back
+                            </button>
+                        )}
                         <button
                             type='button'
                             onClick={next}
@@ -106,3 +111,6 @@ const Form = () => {
 
 
 export default Form;
+
+
+//<AddOns register={register} errors={errors} value={options.find(({value}) => value === field.value)} />

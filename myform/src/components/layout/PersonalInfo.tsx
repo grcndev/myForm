@@ -14,7 +14,9 @@ const PersonalInfo = ({ register, errors }) => {
           </label>
           {errors.name?.message && (<p className='mt-2 text-sm text-strawberry_red font-semibold'>{errors.name.message}</p>)}
             </div>
-          <input type='text' id='name' autoComplete='given-name' className='block w-full rounded-md border-solid border-2 border-light_gray py-1.5 ' {...register('name')} />
+          <input type='text' id='name' autoComplete='given-name' className='block w-full pl-2 text-marine_bleu rounded-md border-solid border-2 border-light_gray py-1.5 ' {...register('name')} />
+          <div> 
+          </div>
         </div>
        
         <div className='sm:col-span-3'>
@@ -24,7 +26,7 @@ const PersonalInfo = ({ register, errors }) => {
           </label>
           {errors.email?.message && (<p className='mt-2 text-sm text-strawberry_red font-semibold'>{errors.email.message}</p>)}
           </div>
-            <input type='email' id='email' autoComplete='email' className='block w-full rounded-md border-solid border-2 border-light_gray focus:border-marine_bleu py-1.5 ' {...register('email')} />
+            <input type='email' id='email' autoComplete='email' className='block w-full  pl-2 text-marine_bleu rounded-md border-solid border-2 border-light_gray focus:border-marine_bleu py-1.5 ' {...register('email')} />
         </div>
 
         <div className='sm:col-span-3'>
@@ -34,7 +36,7 @@ const PersonalInfo = ({ register, errors }) => {
           </label>
           {errors.phoneNumber?.message && (<p className='mt-2 text-sm text-strawberry_red font-semibold'>{errors.phoneNumber.message}</p>)}
         </div>
-        <input type='phone' id='email' autoComplete='phoneNumber' className='block w-full rounded-md border-solid border-2 border-light_gray py-1.5' {...register('phoneNumber', {valueAsNumber: true})} />
+        <input type='phone' id='email' autoComplete='phoneNumber' className='block w-full pl-2 text-marine_bleu rounded-md border-solid border-2 border-light_gray py-1.5' {...register('phoneNumber', {valueAsNumber: true})} />
       </div>
       </div>
     </>

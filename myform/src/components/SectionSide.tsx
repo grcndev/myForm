@@ -1,10 +1,11 @@
 import React from "react";
 
-const SectionSide = ({ number, step, sideTitle }) => {
+const SectionSide = ({ step, sideTitle, currentStep}) => {
+  const backgroundColor = currentStep === step ? 'bg-alabaster':'bg-marine_bleu';
   return (
     <div className="flex items-center  px-2 py-8 ml-8">
-      <div className=" flex items-center justify-center mr-6 bg-pastel_blue rounded-full h-8 w-8">
-        {number}
+      <div className={`flex items-center justify-center ${backgroundColor} mr-6 bg-pastel_blue rounded-full h-8 w-8`}>
+        {currentStep}
       </div>
       <div>
         <h6 className="text-xs text-cool_gray">{step}</h6>
