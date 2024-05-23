@@ -9,7 +9,7 @@ const PersonalInfo = ({ register, errors }) => {
       <div className='mt-20 grid grid-cols-1 gap-x-6 gap-y-6'>
         <div className='sm:col-span-3'>
         <div className="flex items-center justify-between">
-          <label htmlFor='first-name' className="text-marine_bleu">
+          <label htmlFor='name' className="text-marine_bleu">
             Name
           </label>
           {errors.name?.message && (<p className='mt-2 text-sm text-strawberry_red font-semibold'>{errors.name.message}</p>)}
@@ -21,7 +21,7 @@ const PersonalInfo = ({ register, errors }) => {
        
         <div className='sm:col-span-3'>
         <div className="flex items-center justify-between">
-          <label htmlFor='last-name' className='block text-sm font-medium leading-6 text-marine_bleu'>
+          <label htmlFor='email' className='block text-sm font-medium leading-6 text-marine_bleu'>
             Email Adress
           </label>
           {errors.email?.message && (<p className='mt-2 text-sm text-strawberry_red font-semibold'>{errors.email.message}</p>)}
@@ -31,12 +31,12 @@ const PersonalInfo = ({ register, errors }) => {
 
         <div className='sm:col-span-3'>
         <div className="flex items-center justify-between">
-          <label htmlFor='email' className="text-marine_bleu">
+          <label htmlFor='phoneNumber' className="block text-sm font-medium leading-6 text-marine_bleu">
             Phone Number
           </label>
           {errors.phoneNumber?.message && (<p className='mt-2 text-sm text-strawberry_red font-semibold'>{errors.phoneNumber.message}</p>)}
         </div>
-        <input type='phone' id='email' autoComplete='phoneNumber' className='block w-full pl-2 text-marine_bleu rounded-md border-solid border-2 border-light_gray py-1.5' {...register('phoneNumber', {valueAsNumber: true})} />
+        <input type='phone' id='phoneNumber' autoComplete='phoneNumber' className='block w-full pl-2 text-marine_bleu rounded-md border-solid border-2 border-light_gray py-1.5' {...register('phoneNumber', {valueAsNumber: true})} />
       </div>
       </div>
     </>

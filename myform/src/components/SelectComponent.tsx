@@ -7,14 +7,23 @@ type SelectComponent = {
     type: string
 }
 
-const SelectComponent = ({ plan, price, src, type, setValue}: SelectComponent) => {
+const SelectComponent = ({ plan, price, src, type, setValue, selectedPlan}: SelectComponent) => {
+
+    // const bg = type === selectedPlan ? 'bg-magnolia' : 'bg-white'
+
+    let bg = 'white'
+
+    if (selectedPlan === type) {
+        bg = 'bg-magnolia'
+    }
 
     const backgroundColor = type === 'arcade' ? 'bg-alabaster' : type === 'advanced' ? 'bg-light_coral' : type === 'pro' ? 'bg-purplish_blue' : '';
 
+
+
     return (
-        <div className='flex flex-col justify-between mt-3 m-2 px-2 h-40 w-36 border-solid border-2 border-light_gray focus:border-marine_bleu rounded-md cursor-pointer' onClick={() => {
-            setValue('selectedPlan', price)
-            
+        <div className={`flex flex-col justify-between mt-3 m-2 px-2 h-40 w-36 border-2 ${bg} border-light_purple'  focus:border-marine_bleu rounded-md cursor-pointer`} onClick={() => {
+            setValue('selectedPlan', type)
         }}
             >
             <div className={`flex justify-center mt-4 ml-2 ${backgroundColor} text-white h-10 w-10 rounded-full`}>

@@ -1,11 +1,13 @@
 import React from "react";
 
-const SectionSide = ({ step, sideTitle, currentStep}) => {
-  const backgroundColor = currentStep === step ? 'bg-alabaster':'bg-marine_bleu';
+const SectionSide = ({ step, sideTitle, currentStepTrue}) => {
+
+  const backgroundColor = step.includes(currentStepTrue) ? 'bg-light_blue':' border-2 border-light_gray text-light_gray';
+
   return (
-    <div className="flex items-center  px-2 py-8 ml-8">
-      <div className={`flex items-center justify-center ${backgroundColor} mr-6 bg-pastel_blue rounded-full h-8 w-8`}>
-        {currentStep}
+    <div className="flex items-center  px-2 py-6 ml-8">
+      <div className={`flex items-center justify-center mr-6 ${backgroundColor} rounded-full h-8 w-8`}>
+        {step.split(' ')[1]}
       </div>
       <div>
         <h6 className="text-xs text-cool_gray">{step}</h6>

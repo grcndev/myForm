@@ -4,7 +4,7 @@ import { IoLogoGameControllerA } from 'react-icons/io'
 import { IoGameController } from "react-icons/io5"
 import SelectComponent from "../SelectComponent";
 
-const SelectPlan = ({setValue, errors}) => {
+const SelectPlan = ({register, setValue, errors, selectedPlan}) => {
 
   return (
     <>
@@ -12,11 +12,11 @@ const SelectPlan = ({setValue, errors}) => {
       <p className="text-cool_gray">You have the option of monthly or yearly billing.</p>
 
       <div className='mt-10 flex flex-col'>
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-center" {...register}>
           <div className="flex items-center justify-center" id="monthly">
-          <SelectComponent  price={'$9/mo'} src={<SiApplearcade/>} type={'arcade'} plan={'Arcade'} setValue={setValue}/>
-          <SelectComponent price={'$12/mo'} src={<IoLogoGameControllerA/>} type={'advanced'} plan={'Advanced'} setValue={setValue} />
-          <SelectComponent  price={'$15/mo'} src={<IoGameController/>}  type={'pro'} plan={'Pro'} setValue={setValue}/>
+          <SelectComponent selectedPlan={selectedPlan} price={'$9/mo'} src={<SiApplearcade/>} type={'arcade'} plan={'Arcade'} setValue={setValue}/>
+          <SelectComponent selectedPlan={selectedPlan}  price={'$12/mo'} src={<IoLogoGameControllerA/>} type={'advanced'} plan={'Advanced'} setValue={setValue} />
+          <SelectComponent selectedPlan={selectedPlan}   price={'$15/mo'} src={<IoGameController/>}  type={'pro'} plan={'Pro'} setValue={setValue}/>
           </div>
         </div>
 

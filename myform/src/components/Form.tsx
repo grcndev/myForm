@@ -11,27 +11,29 @@ import SideComponent from './SideComponent'
 import Summary from './layout/Summary'
 import Feedback from './Feedback'
 
-
-
-
 type Inputs = z.infer<typeof FormDataSchema>
 
 type FieldName = keyof Inputs
 
 const steps = [
-    { id: 'Step 1', name: 'Personal Information', fields: ['name', 'email', 'phoneNumber'] },
-    { id: 'Step 2', name: 'Select Plan', fields: ['selectedPlan'] },
-    { id: 'Step 3', name: 'Pick Add-Ons', fields: ['add_ons'] },
-    { id: 'Step 4', name: 'Summary' },
-    { id: 'Step 5', name: 'Complete' },
+    { id: '1', name: 'Personal Information', fields: ['name', 'email', 'phoneNumber']},
+    { id: '2', name: 'Select Plan', fields: ['selectedPlan']},
+    { id: '3', name: 'Pick Add-Ons', fields: ['add_ons']},
+    { id: '4', name: 'Summary'},
+    { id: '5', name: 'Complete'},
 ]
 
 const Form = () => {
 
     const [currentStep, setCurrentStep] = useState(0)
+    const [currentStepTrue, setCurrentStepTrue] = useState(1)
 
     const { getValues, setValue ,register, handleSubmit, watch, reset, trigger, formState: { errors } } = useForm<Inputs>({ resolver: zodResolver(FormDataSchema) })
+    
+    const selectedPlan = watch('selectedPlan');
 
+    const selectedService = watch('add_ons');
+    console.log(selectedService, 'add_ons')
 
     const processForm: SubmitHandler<Inputs> = data => {
         console.log('foi!', data)
@@ -48,31 +50,35 @@ const Form = () => {
                 await handleSubmit(processForm)()
             }
             setCurrentStep(step => step + 1)
+            setCurrentStepTrue(step => step + 1)
         }
     }
 
     const prev = () => {
         if (currentStep > 0) {
             setCurrentStep(step => step - 1)
+            setCurrentStepTrue(step => step  - 1)
+
         }
     }
 
     return (
         <section className='flex items-center justify-between m-48 p-6 rounded-xl bg-white'>
-            <SideComponent currentStep={currentStep}/>
+            <SideComponent currentStepTrue={currentStepTrue}/>
+            
             <div className='flex flex-col'>
-                <form className='mx-20 mt-8' onSubmit={handleSubmit(processForm)}>
+                <form className='mx-20 mt-8' onSubmit={handleSubmit(processForm)} noValidate>
                     {currentStep === 0 && (
                         <PersonalInfo register={register} errors={errors} />
                     )}
                     {currentStep === 1 && (
-                        <SelectPlan  errors={errors} setValue={setValue}/>
+                        <SelectPlan  register errors={errors} setValue={setValue} selectedPlan={selectedPlan}/>
                     )}
                     {currentStep === 2 && (
-                        <AddOns errors={errors} setValue={setValue}/>
+                        <AddOns register={register} errors={errors} setValue={setValue} selectedService={selectedService}/>
                     )}
                     {currentStep === 3 && (
-                        <Summary watch={SelectPlan} />
+                        <Summary selectedPlan={SelectPlan} />
                     )}
                     {currentStep === 4 && (
                         <Feedback />
