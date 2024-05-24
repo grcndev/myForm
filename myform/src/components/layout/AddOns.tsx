@@ -1,7 +1,7 @@
 import React from 'react';
 import AddOnsComponent from './AddOnsComponent';
 
-const AddOns = ({ register, errors, setValue, selectedServices }) => (
+const AddOns = ({ register, errors, setValue, selectedServices, watch }) => (
   <div>
     <h2 className="text-marine_bleu font-bold text-3xl mr-20 mb-4">Pick add-ons</h2>
     <p className="text-cool_gray">Add-ons help enhance your gaming experience.</p>
@@ -14,6 +14,7 @@ const AddOns = ({ register, errors, setValue, selectedServices }) => (
           text={'Acess to multiplayer games'}
           price={'1'}
           setValue={setValue}
+          watch={watch}
         />
         <AddOnsComponent
           register={register}
@@ -22,6 +23,7 @@ const AddOns = ({ register, errors, setValue, selectedServices }) => (
           text={'Extra 1TB cloud save'}
           price={'2'}
           setValue={setValue}
+          watch={watch}
         />
         <AddOnsComponent
           register={register}
@@ -30,6 +32,7 @@ const AddOns = ({ register, errors, setValue, selectedServices }) => (
           text={'Custom theme on your profile'}
           price={'3'}
           setValue={setValue}
+          watch={watch}
         />
       </section>
       {errors.add_ons?.message && <p className="mt-2 text-sm text-light_coral">{errors.add_ons.message}</p>}

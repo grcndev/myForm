@@ -37,7 +37,30 @@ const Form = () => {
     reset,
     trigger,
     formState: { errors },
-  } = useForm<Inputs>({ resolver: zodResolver(FormDataSchema) });
+  } = useForm<Inputs>({
+    resolver: zodResolver(FormDataSchema),
+    defaultValues: {
+      add_ons: [],
+    },
+  });
+
+  const addOnsData = [
+    {
+      title: 'Online Service',
+      price: 1,
+      text: 'Acess to multiplayer games',
+    },
+    {
+      title: 'Larger Storage',
+      price: 2,
+      text: 'Extra 1TB cloud save',
+    },
+    {
+      title: 'Customizable Profile',
+      price: 3,
+      text: 'Custom theme on your profile',
+    },
+  ];
 
   const selectedPlan = watch('selectedPlan');
   const selectedServices = watch('add_ons');
@@ -48,14 +71,14 @@ const Form = () => {
   };
 
   const next = async () => {
-    const fields = steps[currentStep].fields;
-    const output = await trigger(fields as FieldName[], { shouldFocus: true });
-    if (!output) return;
+    // const fields = steps[currentStep].fields;
+    // const output = await trigger(fields as FieldName[], { shouldFocus: true });
+    // if (!output) return;
 
     if (currentStep < steps.length - 1) {
-      if (currentStep === steps.length - 5) {
-        await handleSubmit(processForm)();
-      }
+      // if (currentStep === steps.length - 5) {
+      //   await handleSubmit(processForm)();
+      // }
       setCurrentStep(step => step + 1);
       setCurrentStepTrue(step => step + 1);
     }
@@ -79,9 +102,17 @@ const Form = () => {
             <SelectPlan register={register} errors={errors} setValue={setValue} selectedPlan={selectedPlan} />
           )}
           {currentStep === 2 && (
-            <AddOns register={register} errors={errors} setValue={setValue} selectedServices={selectedServices} />
+            <AddOns
+              register={register}
+              errors={errors}
+              setValue={setValue}
+              selectedServices={selectedServices}
+              watch={watch}
+            />
           )}
-          {currentStep === 3 && <Summary selectedServices={selectedServices} selectedPlan={selectedPlan} />}
+          {currentStep === 3 && (
+            <Summary selectedServices={selectedServices} selectedPlan={selectedPlan} addOnsData={addOnsData} />
+          )}
           {currentStep === 4 && <Feedback />}
         </form>
 

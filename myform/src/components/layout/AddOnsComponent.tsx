@@ -1,15 +1,11 @@
 import React from 'react';
 
-const AddOnsComponent = ({ text, title, price, setValue, selectedServices, register }) => {
-  const options = selectedServices ? selectedServices : [];
-
-  console.log(selectedServices);
-  const isChecked = options.find(service => {
-    console.log('found', service, service.title, title, service.title === title);
-    return service.title === title;
+const AddOnsComponent = ({ text, title, price, setValue, selectedServices, register, watch }) => {
+  const isChecked = !!selectedServices.find(serviceTitle => {
+    return serviceTitle === title;
   });
 
-  console.log('is checked', isChecked);
+  console.log(selectedServices, title, isChecked);
 
   const bg = isChecked ? 'bg-magnolia' : 'bg-white';
 
@@ -19,22 +15,24 @@ const AddOnsComponent = ({ text, title, price, setValue, selectedServices, regis
         {...register('add_ons')}
         className="ml-2"
         type="checkbox"
-        value={title}
         onChange={e => {
           const newSelection = e.target.checked
-            ? [...options, { title, price }]
-            : options.filter(service => service.title !== title);
+            ? [...selectedServices, title]
+            : selectedServices.filter(serviceTitle => title !== serviceTitle);
+
+          console.log('running', newSelection);
 
           setValue('add_ons', newSelection);
         }}
+        value={title}
         checked={isChecked}
-        id=""
+        id="id"
       />
       <div className="">
         <h5 className="text-marine_bleu font-bold">{title}</h5>
         <span className="text-cool_gray text-sm">{text}</span>
       </div>
-      <span className="text-purplish_blue">+${price}/mo</span>
+      <span className="text-purplish_blue">+${parseFloat(price)}/mo</span>
     </div>
   );
 };
