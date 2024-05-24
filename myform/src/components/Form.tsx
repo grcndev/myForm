@@ -48,16 +48,19 @@ const Form = () => {
     {
       title: 'Online Service',
       price: 1,
+
       text: 'Acess to multiplayer games',
     },
     {
       title: 'Larger Storage',
-      price: 2,
+
+      price: 7,
       text: 'Extra 1TB cloud save',
     },
     {
       title: 'Customizable Profile',
-      price: 3,
+
+      price: 9,
       text: 'Custom theme on your profile',
     },
   ];
@@ -108,6 +111,7 @@ const Form = () => {
               setValue={setValue}
               selectedServices={selectedServices}
               watch={watch}
+              addOnsData={addOnsData}
             />
           )}
           {currentStep === 3 && (

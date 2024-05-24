@@ -1,11 +1,11 @@
 import React from 'react';
 
-const AddOnsComponent = ({ text, title, price, setValue, selectedServices, register, watch }) => {
+const AddOnsComponent = ({ data, setValue, selectedServices, register, watch }) => {
   const isChecked = !!selectedServices.find(serviceTitle => {
-    return serviceTitle === title;
+    return serviceTitle === data.title;
   });
 
-  console.log(selectedServices, title, isChecked);
+  console.log(selectedServices, data.title, isChecked);
 
   const bg = isChecked ? 'bg-magnolia' : 'bg-white';
 
@@ -17,22 +17,22 @@ const AddOnsComponent = ({ text, title, price, setValue, selectedServices, regis
         type="checkbox"
         onChange={e => {
           const newSelection = e.target.checked
-            ? [...selectedServices, title]
-            : selectedServices.filter(serviceTitle => title !== serviceTitle);
+            ? [...selectedServices, data.title]
+            : selectedServices.filter(serviceTitle => data.title !== serviceTitle);
 
           console.log('running', newSelection);
 
           setValue('add_ons', newSelection);
         }}
-        value={title}
+        value={data.title}
         checked={isChecked}
         id="id"
       />
       <div className="">
-        <h5 className="text-marine_bleu font-bold">{title}</h5>
-        <span className="text-cool_gray text-sm">{text}</span>
+        <h5 className="text-marine_bleu font-bold">{data.title}</h5>
+        <span className="text-cool_gray text-sm">{data.text}</span>
       </div>
-      <span className="text-purplish_blue">+${parseFloat(price)}/mo</span>
+      <span className="text-purplish_blue">+${parseFloat(data.price)}/mo</span>
     </div>
   );
 };

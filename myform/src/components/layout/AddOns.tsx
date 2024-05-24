@@ -1,13 +1,23 @@
 import React from 'react';
 import AddOnsComponent from './AddOnsComponent';
 
-const AddOns = ({ register, errors, setValue, selectedServices, watch }) => (
+const AddOns = ({ register, errors, setValue, selectedServices, watch, addOnsData }) => (
   <div>
     <h2 className="text-marine_bleu font-bold text-3xl mr-20 mb-4">Pick add-ons</h2>
     <p className="text-cool_gray">Add-ons help enhance your gaming experience.</p>
     <div className="mt-10">
       <section className="mb-4 ">
-        <AddOnsComponent
+        {addOnsData.map(data => (
+          <AddOnsComponent
+            register={register}
+            selectedServices={selectedServices}
+            data={data}
+            setValue={setValue}
+            watch={watch}
+          />
+        ))}
+
+        {/* <AddOnsComponent
           register={register}
           selectedServices={selectedServices}
           title={'Online Service'}
@@ -21,7 +31,7 @@ const AddOns = ({ register, errors, setValue, selectedServices, watch }) => (
           selectedServices={selectedServices}
           title={'Larger Storage'}
           text={'Extra 1TB cloud save'}
-          price={'2'}
+          price={'7'}
           setValue={setValue}
           watch={watch}
         />
@@ -30,10 +40,10 @@ const AddOns = ({ register, errors, setValue, selectedServices, watch }) => (
           selectedServices={selectedServices}
           title={'Customizable Profile'}
           text={'Custom theme on your profile'}
-          price={'3'}
+          price={'9'}
           setValue={setValue}
           watch={watch}
-        />
+        /> */}
       </section>
       {errors.add_ons?.message && <p className="mt-2 text-sm text-light_coral">{errors.add_ons.message}</p>}
     </div>
