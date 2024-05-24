@@ -36,8 +36,8 @@ const Summary = ({ selectedServices, selectedPlan, addOnsData }) => {
         {}
       </div>
       <div className="flex items-center justify-between mb-2">
-        <h5 className="text-cool_gray mt-4">Total</h5>
-        <span className="text-purplish_blue text-md font-bold">+${totalPrice}</span>
+        <h5 className="text-cool_gray mt-4">Total Price</h5>
+        <span className="text-purplish_blue text-md font-bold mt-4">+${totalPrice}/mo</span>
       </div>
     </div>
   );

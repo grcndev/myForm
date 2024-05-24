@@ -29,7 +29,6 @@ const Form = () => {
   const [currentStepTrue, setCurrentStepTrue] = useState(1);
 
   const {
-    getValues,
     setValue,
     register,
     handleSubmit,
@@ -41,6 +40,7 @@ const Form = () => {
     resolver: zodResolver(FormDataSchema),
     defaultValues: {
       add_ons: [],
+      // phoneNumber: '',
     },
   });
 
@@ -74,14 +74,14 @@ const Form = () => {
   };
 
   const next = async () => {
-    // const fields = steps[currentStep].fields;
-    // const output = await trigger(fields as FieldName[], { shouldFocus: true });
-    // if (!output) return;
+    const fields = steps[currentStep].fields;
+    const output = await trigger(fields as FieldName[], { shouldFocus: true });
+    if (!output) return;
 
     if (currentStep < steps.length - 1) {
-      // if (currentStep === steps.length - 5) {
-      //   await handleSubmit(processForm)();
-      // }
+      if (currentStep === steps.length - 5) {
+        await handleSubmit(processForm)();
+      }
       setCurrentStep(step => step + 1);
       setCurrentStepTrue(step => step + 1);
     }
@@ -110,7 +110,6 @@ const Form = () => {
               errors={errors}
               setValue={setValue}
               selectedServices={selectedServices}
-              watch={watch}
               addOnsData={addOnsData}
             />
           )}
@@ -161,5 +160,3 @@ const Form = () => {
 };
 
 export default Form;
-
-//<AddOns register={register} errors={errors} value={options.find(({value}) => value === field.value)} />
