@@ -1,7 +1,8 @@
 import React from 'react';
 import SectionSide from './SectionSide';
+import { SectionSideProps } from '@/data/TypesOfTypes';
 
-const SideComponent = ({ currentStepTrue }) => {
+const SideComponent = ({ currentStepTrue }: SectionSideProps) => {
   return (
     <div className="w-60 h-[500px] rounded-xl bg-cover bg-capa">
       <SectionSide currentStepTrue={currentStepTrue} step={'Step 1'} sideTitle={'Your Info'} />

@@ -1,9 +1,10 @@
 import React from 'react';
+import { SectionSideProps } from '@/data/TypesOfTypes';
 
-const SectionSide = ({ step, sideTitle, currentStepTrue }) => {
+const SectionSide = ({ step, sideTitle, currentStepTrue }: SectionSideProps) => {
   const backgroundColor = step.includes(currentStepTrue)
     ? 'bg-light_blue'
-    : ' border-2 border-light_gray text-light_gray';
+    : 'border-2 border-light_gray text-light_gray';
 
   return (
     <div className="flex items-center px-2 py-4 ml-8">

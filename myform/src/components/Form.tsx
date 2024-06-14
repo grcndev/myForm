@@ -1,6 +1,5 @@
 'use client';
 import { useState } from 'react';
-import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { FormDataSchema } from './FormDataSchema';
@@ -10,22 +9,11 @@ import AddOns from './layout/AddOns';
 import SideComponent from './SideComponent';
 import Summary from './layout/Summary';
 import Feedback from './Feedback';
-
-type Inputs = z.infer<typeof FormDataSchema>;
-
-type FieldName = keyof Inputs;
-
-const steps = [
-  { id: '1', name: 'Personal Information', fields: ['name', 'email', 'phoneNumber'] },
-  { id: '2', name: 'Select Plan', fields: ['selectedPlan'] },
-  { id: '3', name: 'Pick Add-Ons', fields: ['add_ons'] },
-  { id: '4', name: 'Summary' },
-  { id: '5', name: 'Complete' },
-];
+import { addOnsData, steps } from '../data/items';
+import { Inputs, FieldName } from '@/data/TypesOfTypes';
 
 const Form = () => {
   const [currentStep, setCurrentStep] = useState(0);
-
   const [currentStepTrue, setCurrentStepTrue] = useState(1);
 
   const {
@@ -39,34 +27,18 @@ const Form = () => {
   } = useForm<Inputs>({
     resolver: zodResolver(FormDataSchema),
     defaultValues: {
+      name: '',
+      email: '',
+      phoneNumber: '',
+      selectedPlan: '',
       add_ons: [],
-      // phoneNumber: '',
     },
   });
 
-  const addOnsData = [
-    {
-      title: 'Online Service',
-      price: 1,
-
-      text: 'Acess to multiplayer games',
-    },
-    {
-      title: 'Larger Storage',
-
-      price: 7,
-      text: 'Extra 1TB cloud save',
-    },
-    {
-      title: 'Customizable Profile',
-
-      price: 9,
-      text: 'Custom theme on your profile',
-    },
-  ];
-
   const selectedPlan = watch('selectedPlan');
   const selectedServices = watch('add_ons');
+
+  console.log(selectedServices, errors);
 
   const processForm: SubmitHandler<Inputs> = data => {
     console.log('foi!', data);
@@ -94,6 +66,8 @@ const Form = () => {
     }
   };
 
+  const x = setValue;
+
   return (
     <section className="flex items-center justify-between m-48 p-6 rounded-xl bg-white">
       <SideComponent currentStepTrue={currentStepTrue} />
@@ -102,7 +76,7 @@ const Form = () => {
         <form className="mx-20 mt-8" onSubmit={handleSubmit(processForm)} noValidate>
           {currentStep === 0 && <PersonalInfo register={register} errors={errors} />}
           {currentStep === 1 && (
-            <SelectPlan register={register} errors={errors} setValue={setValue} selectedPlan={selectedPlan} />
+            <SelectPlan register={register} errors={errors} setValue={x} selectedPlan={selectedPlan} />
           )}
           {currentStep === 2 && (
             <AddOns

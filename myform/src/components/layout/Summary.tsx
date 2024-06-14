@@ -1,7 +1,8 @@
+import { SummaryProps } from '@/data/TypesOfTypes';
 import React from 'react';
 
-const Summary = ({ selectedServices, selectedPlan, addOnsData }) => {
-  const planPrice = selectedPlan === 'Arcade' ? 10 : selectedPlan === 'Advanced' ? 12 : selectedPlan === 'Pro' ? 15 : 0;
+const Summary = ({ selectedServices, selectedPlan, addOnsData }: SummaryProps) => {
+  const planPrice = selectedPlan === 'Arcade' ? 9 : selectedPlan === 'Advanced' ? 12 : selectedPlan === 'Pro' ? 15 : 0;
 
   const selectedData = selectedServices.map(el => {
     for (let elements of addOnsData) {
@@ -12,7 +13,8 @@ const Summary = ({ selectedServices, selectedPlan, addOnsData }) => {
   });
 
   const totalPrice = selectedData.reduce((total, current) => {
-    return total + current.price;
+    const res = (total + current.price) as number;
+    return res;
   }, planPrice);
 
   return (
@@ -28,8 +30,8 @@ const Summary = ({ selectedServices, selectedPlan, addOnsData }) => {
         <div className="">
           {selectedData.map((data, id) => (
             <div key={id} className="flex items-center justify-between py-1">
-              <h5 className="text-cool_gray font-normal">{data.title}</h5>
-              <p className="text-marine_bleu font-normal">+${data.price}</p>
+              <h5 className="text-cool_gray font-normal">{data?.title}</h5>
+              <p className="text-marine_bleu font-normal">+${data?.price}</p>
             </div>
           ))}
         </div>

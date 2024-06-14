@@ -1,16 +1,15 @@
+import { AddOnsProps } from '@/data/TypesOfTypes';
 import React from 'react';
 
-const AddOnsComponent = ({ data, setValue, selectedServices, register }) => {
+const AddOnsComponent = ({ data, setValue, selectedServices, register }: AddOnsProps) => {
   const isChecked = !!selectedServices.find(serviceTitle => {
     return serviceTitle === data.title;
   });
 
-  console.log(selectedServices, data.title, isChecked);
-
   const bg = isChecked ? 'bg-magnolia' : 'bg-white';
 
   return (
-    <div className={`flex items-center justify-between  ${bg} border-2 border-marine_bleu rounded-md py-1 px-2 mb-3`}>
+    <div className={`flex items-center justify-between ${bg} border-2 border-marine_bleu rounded-md py-1 px-2 mb-3`}>
       <input
         {...register('add_ons')}
         className="ml-2"
@@ -19,8 +18,6 @@ const AddOnsComponent = ({ data, setValue, selectedServices, register }) => {
           const newSelection = e.target.checked
             ? [...selectedServices, data.title]
             : selectedServices.filter(serviceTitle => data.title !== serviceTitle);
-
-          console.log('running', newSelection);
 
           setValue('add_ons', newSelection);
         }}

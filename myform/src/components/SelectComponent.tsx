@@ -1,13 +1,7 @@
 import React from 'react';
+import { SelectComponentProps } from '@/data/TypesOfTypes';
 
-type SelectComponent = {
-  plan: string;
-  price: string;
-  src: string;
-  type: string;
-};
-
-const SelectComponent = ({ price, src, type, setValue, selectedPlan, register }: SelectComponent) => {
+const SelectComponent = ({ price, src, type, setValue, selectedPlan, register }: SelectComponentProps) => {
   let bg = 'white';
 
   if (selectedPlan === type) {
@@ -23,14 +17,13 @@ const SelectComponent = ({ price, src, type, setValue, selectedPlan, register }:
       ? 'bg-purplish_blue'
       : '';
 
-  console.log(type);
-
   return (
     <div
       {...register('selectedPlan')}
-      className={`flex flex-col justify-between mt-3 m-2 px-2 h-40 w-36 border-2 ${bg} border-light_purple'  focus:border-marine_bleu rounded-md cursor-pointer`}
+      id={type}
+      className={`flex flex-col justify-between mt-3 m-2 px-2 h-40 w-36 border-2 ${bg} border-light_purple' focus:border-marine_bleu rounded-md cursor-pointer`}
       onClick={() => {
-        setValue('selectedPlan', type, price);
+        setValue('selectedPlan', type);
       }}
     >
       <div className={`flex justify-center mt-4 ml-2 ${backgroundColor} text-white h-10 w-10 rounded-full`}>
